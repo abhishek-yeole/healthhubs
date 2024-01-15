@@ -1,0 +1,98 @@
+.analysis {
+    font-family: 'Poppins', serif;
+    width: 30%;
+    height: 70vh;
+    overflow: scroll;
+}
+.analysis::-webkit-scrollbar { 
+    display: none;
+}
+
+.analysis img {
+    width: 100%;
+}
+
+.analysis table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+  
+.analysis table td, .analysis table th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.analysis table tr:nth-child(even){background-color: #f2f2f2;}
+.analysis table tr:nth-child(odd){background-color: #ffffff;}
+
+.analysis table tr:hover {background-color: #ddd;}
+
+.analysis table th {
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.analysis blockquote {
+    background-color: #00fbff;
+    padding: 2px;
+    text-indent: 20px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.bmi-title {
+    font-family: 'Lemon', serif;
+    font-size: large;
+    text-align: center;
+}
+
+.bmi-main {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.bmi-survey {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+    padding: 10px;
+    width: 30%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.bmi-output {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 18px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+    padding: 10px;
+    width: 30%;
+    height: 400px;
+    font-size: large;
+    font-family: 'Poppins', serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}

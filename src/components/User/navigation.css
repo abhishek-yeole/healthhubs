@@ -1,0 +1,180 @@
+.nav-main {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    height: auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 26px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+
+.nav-section-1,
+.nav-section-2 {
+    font-family: 'Lemon', sans-serif;
+    font-size: x-large;
+    font-weight: bolder;
+}
+hr.nav-section {
+    border-radius: 20px;
+    border: 2px dashed rgb(161, 161, 161);
+}
+
+.nav-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.nav-block {
+    width: 600px;
+    margin: 10px;
+    margin-top: 15px;
+    padding: 12px;
+    transition: all ease-out 0.2s;
+}
+.nav-block:hover {
+    transform: scale(1.02);
+}
+.background-1 {
+    background: #FF00FF;
+    background: linear-gradient(to bottom left, #FF00FF 10%, #00FFFF 90%);
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+.background-2 {
+    background: #00FFFF;
+    background: linear-gradient(to bottom left, #00FFFF 25%, #00FF00 100%);    
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+.background-3 {
+    background: #FF914D;
+    background: linear-gradient(to bottom left, #FF914D 10%, #FF3131 90%);    
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+.background-4 {
+    background: #94b9ff;
+    background: linear-gradient(to bottom left, #94b9ff 10%, #CDFFD8 90%);    
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+.background-5 {
+    background: #ffde59;
+    background: linear-gradient(to bottom left, #ffde59 10%, #0CC0DF 90%);    
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+.background-6 {
+    background: #FF914D;
+    background: linear-gradient(to bottom left, #FF914D 0%, #8C52FF 84%);    
+    box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 5px );
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.18);
+}
+
+.nav-card-1,
+.nav-card-2,
+.nav-card-3,
+.nav-card-4,
+.nav-card-5,
+.nav-card-6 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.nav-image img {
+    width: 200px;
+    object-fit: cover;
+}
+
+.nav-content {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.nav-title {
+    font-family: 'Lemon', sans-serif;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.nav-info {
+    font-family: 'Poppins', serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+@media screen and (max-width: 900px){
+    .nav-container {
+        width: 95%;
+        margin: auto;
+        height: auto;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.18);
+    }
+    .nav-section-1,
+    .nav-section-2 {
+        font-size: large;
+        font-weight: bold;
+    }
+    hr.nav-section {
+        border-radius: 10px;
+        border: 1px dashed rgb(161, 161, 161);
+    }
+    .nav-block {
+        width: 100%;
+        margin: 5px;
+        margin-top: 7px;
+        padding: 6px;
+    }
+    .nav-image img {
+        width: 100px;
+    }
+    .nav-content {
+        padding: 3px;
+    }
+    .nav-title {
+        font-weight: bold;
+        font-size: large;
+    }
+    .nav-info {
+        font-weight: 800;
+        font-size: 12px;
+    }    
+}
