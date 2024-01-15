@@ -18,7 +18,7 @@ const Ml = () => {
             <Header />
             <Background /><br /><br /><br /><br />
             <div style={{width: '95%', margin:'auto'}}>
-                <gradio-app ref={gradioAppRef} src="http://127.0.0.1:7860/" class="light"></gradio-app>
+                <gradio-app ref={gradioAppRef} src="https://abhicodes-healthapp.hf.space/" class="light"></gradio-app>
             </div>
         </div>
     )
