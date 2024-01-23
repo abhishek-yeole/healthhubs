@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from 'pexels';
+import './pet.css';
 
 const Images = ({ apiKey, query }) => {
   const [photos, setPhotos] = useState([]);
@@ -23,21 +24,14 @@ const Images = ({ apiKey, query }) => {
   }, [apiKey, query]);
 
   return (
-    <div>
-      <h1>Search Results for "{query}"</h1>
+    <div className='images-container'>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className='images-main'>
           {photos.map((photo) => (
-            <div key={photo.id}>
-              <h2>Photographer: {photo.photographer}</h2>
-              <img src={photo.src.large2x} alt={photo.alt} />
-              <p>
-                <a href={photo.url} target="_blank" rel="noopener noreferrer">
-                  View on Pexels
-                </a>
-              </p>
+            <div className='images-tracker' key={photo.id}>
+                <img src={photo.src.large2x} alt={photo.photographer} />
             </div>
           ))}
         </div>

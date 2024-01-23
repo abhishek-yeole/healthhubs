@@ -93,32 +93,32 @@ const Happy = () => {
         setActiveStep(0); setCa1(0); setSa1(0); setSa2(0); setSa3(0); setSa4(0); setP1(''); setP2('');setP3('');setP4('');  setP5('');setH1('');setH2(''); setH3('');setH4('');setT1('');setT2('');setT3('');setL1('');setL2('');setL3('');setL4('');setCo1('');setCo2('');setCo3('');setCo4('');setCo5('');setCo6('');setCo7('');setSo1('');setSo2('');setSo3('');setSo4('');setE1('');setE2('');setE3('');setE4('');setG1('');setG2('');setG3('');setG4('');setG5(0);setSt1('');setSt2('');setSt3('');setSt4('');setW1('');setW2('');setW3('');setW4('');setW5('');setW6('');
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         setDisabled(true);
         setDisplay(true);
-        // try {
-        //     const response = await fetch( 'http://192.168.0.104:5000/happy', {
-        //         method: 'POST',
-        //         headers: {
-        //         'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({ ca1,sa1,sa2,sa3,sa4,p1,p2,p3,p4,p5,h1,h2,h3,h4,t1,t2,t3,l1,l2,l3,l4,co1,co2,co3,co4,co5,co6,co7,so1,so2,so3,so4,e1,e2,e3,e4,g1,g2,g3,g4,g5,st1,st2,st3,st4,w1,w2,w3,w4,w5,w6 }),
-        //     });
+        try {
+            const response = await fetch( 'http://192.168.0.103:5000/happy', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ca1,sa1,sa2,sa3,sa4,p1,p2,p3,p4,p5,h1,h2,h3,h4,t1,t2,t3,l1,l2,l3,l4,co1,co2,co3,co4,co5,co6,co7,so1,so2,so3,so4,e1,e2,e3,e4,g1,g2,g3,g4,g5,st1,st2,st3,st4,w1,w2,w3,w4,w5,w6 }),
+            });
         
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         if (data.success) {
-        //             console.log(data);
-        //             setDisabled(true);
-        //         } else {
-        //             console.log('Something got wrong. Please try again !!');
-        //         }
-        //     } else {
-        //         console.log('Cannot connect to server right now !!');
-        //     }
-        // } catch (error) {
-        //     console.log('We are experiencing heavy traffic !!');
-        // }
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success) {
+                    console.log(data);
+                    setDisabled(true);
+                } else {
+                    console.log('Something got wrong. Please try again !!');
+                }
+            } else {
+                console.log('Cannot connect to server right now !!');
+            }
+        } catch (error) {
+            console.log('We are experiencing heavy traffic !!');
+        }
     }
 
     return (
@@ -127,17 +127,19 @@ const Happy = () => {
             <Background /><br /><br /><br /><br />
             <div className='happy-container'>
                 <div className='happy-info'>
-                    <div className='happy-image-1'><img src={happy1} alt="happy-1" width={'150px'} /></div>
+                    <div className='happy-image-1'><img src={happy1} alt="happy-1"/></div>
                     <div className='happy-text'>
                         <div className='happy-title'>Happiness Index Survey</div><br />
                         <div className='happy-content'>Take a comprehensive questionnaire that help you to define happiness and re-define the purpose of life and government. ​Get your answers by domain and see your Happiness Index.</div><br />
                         <div className='happy-explore'><Button variant='outlined' href='https://worldhappiness.report/' target='_blank' endIcon={<Icon icon="solar:arrow-right-broken" />}>Explore</Button></div>
                     </div>
-                    <div className='happy-image-2'><img src={happy2} alt="happy_2" width={'250px'} /></div>
+                    <div className='happy-image-2'><img src={happy2} alt="happy_2" /></div>
                 </div>
+                <div className='happy-content-hide'>Take a comprehensive questionnaire that help you to define happiness and re-define the purpose of life and government. ​Get your answers by domain and see your Happiness Index.</div><br />
+                <div className='happy-explore-hide'><Button variant='outlined' href='https://worldhappiness.report/' target='_blank' endIcon={<Icon icon="solar:arrow-right-broken" />}>Explore</Button></div>
                 <br /><hr className='happy-hr' /><br />
                 <div className='happy-survey'>
-                    <div className='happy-form' style={{width: '60%'}}>
+                    <div className='happy-form'>
                         <Box sx={{ maxWidth: 600 }}>
                             <Stepper activeStep={activeStep} orientation="vertical">
                                 <Step disabled={disabled} key='Cantril Ladder' index={0}>
@@ -1194,7 +1196,7 @@ const Happy = () => {
                         )}
                     </div>
                 </div>
-            </div>
+            </div><br />
         </div>
     );
 };

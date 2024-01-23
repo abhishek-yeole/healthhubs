@@ -8,14 +8,16 @@ import FormLabel from '@mui/material/FormLabel';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import MARKDOWN from './BMIanalysis.md';
+import MARKDOWN from './BFAanalysis.md';
 import './report.css';
 
-const Bmi = () => {
+const Bfa = () => {
     const [age, setAge] = useState(20);
     const [gender, setGender] = useState('');
     const [weight, setWeight] = useState(70);
     const [height, setHeight] = useState(180);
+    const [neck, setNeck] = useState(50);
+    const [waist, setWaist] = useState(98);
     const [bmi, setBmi] = useState(0);
     const [bmiPrime, setBmiPrime] = useState(0);
     const [ponIndex, setPonIndex] = useState(0);
@@ -134,6 +136,36 @@ const Bmi = () => {
                             value={height}
                             onChange={(e) => setHeight(e.target.value)}
                         />
+                    </Box>
+                    <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', alignItems: 'center' }}>
+                        <Icon icon="mingcute:necktie-line" style={{fontSize: '28px'}}/>
+                        <TextField
+                            size='small'
+                            label="Neck"
+                            id="outlined-start-adornment"
+                            type='number'
+                            sx={{ m: 1, width: '25ch' }}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="start">cm</InputAdornment>,
+                            }}
+                            value={neck}
+                            onChange={(e) => setNeck(e.target.value)}
+                        />
+                    </Box>
+                    <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', alignItems: 'center' }}>
+                        <Icon icon="icon-park:waistline" style={{fontSize: '28px'}}/>
+                        <TextField
+                            size='small'
+                            label="Waist"
+                            id="outlined-start-adornment"
+                            type='number'
+                            sx={{ m: 1, width: '25ch' }}
+                            InputProps={{
+                                endAdornment: <InputAdornment position="start">cm</InputAdornment>,
+                            }}
+                            value={waist}
+                            onChange={(e) => setWaist(e.target.value)}
+                        />
                     </Box><br />
                     <Button variant='contained' onClick={calculateBmi}> Calculate </Button>
                 </div>
@@ -154,4 +186,4 @@ const Bmi = () => {
     )
 }
 
-export default Bmi;
+export default Bfa;

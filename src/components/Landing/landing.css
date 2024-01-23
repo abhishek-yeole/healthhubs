@@ -14,6 +14,8 @@ body::-webkit-scrollbar {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .hero-container {
@@ -36,8 +38,8 @@ body::-webkit-scrollbar {
   height: 50%;
 }
 .hero-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 32px;
+  font-family: 'Lemon', serif;
+  font-size: 28px;
   font-weight: bolder;
   color: red;
 }
@@ -217,4 +219,110 @@ body::-webkit-scrollbar {
   -webkit-backdrop-filter: blur( 5px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.hero-references {
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  margin: auto;
+}
+
+.hero-references img {
+  transition: all ease-in-out 0.7s;
+}
+.hero-references img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px 0 rgba(255, 0, 242, 0.37);
+}
+
+.internal-references,
+.external-references {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.internal-references img,
+.external-references img{
+  width: 425px;
+  border-radius: 20px;
+}
+
+.ref-subtitle {
+  font-family: 'Lemon', serif;
+  font-size: 32px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.ref-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 900px){
+  .hero-main {
+    width: 100dvw;
+    height: 100dvh;
+  }
+  
+  .hero-container {
+    flex-direction: column-reverse;
+    width: 100%;
+    height: 100vh;
+    padding: 10px;
+    margin-top: 200px;
+  }
+  
+  .hero-content {
+    margin-top: 20px;
+    padding-left: 20px;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-title {
+    font-size: 20px;
+  }
+  .hero-subtitle {
+    font-size: 32px;
+  }
+  .hero-explore {
+    font-weight: bold;
+    font-size: large;
+    border-radius: 22px;
+  }
+  
+  .hero-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-references img:hover {
+    transform: scale(1.01);
+  }
+  
+  .internal-references,
+  .external-references {
+    width: 95%;
+    margin: auto;
+  }
+  
+  .internal-references,
+  .external-references {
+    gap: 10px;
+  }
+  
+  .internal-references img,
+  .external-references img{
+    width: 100%;
+    border-radius: 16px;
+  }
+  
+  .ref-subtitle {
+    font-size: 28px;
+    font-weight: bold;
+  }
 }

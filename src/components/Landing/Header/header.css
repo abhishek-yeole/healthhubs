@@ -73,3 +73,39 @@
     text-decoration: none;
     color: black;
 }
+
+@media screen and (max-width: 900px){
+    .header-container {
+        width: 95%;
+        height: 95%;
+        border-radius: 30px;
+    }
+
+    .header-navbar {
+        position: relative;
+        width: 90%;
+        height: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .header-logo {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .header-logo img {
+        height: 3rem;
+        width: auto;
+    }
+
+    .hide-unhide {
+        display:none;
+    }
+    
+    .header-buttons {
+        font-weight: bold;
+        gap: 1rem;
+    }
+}

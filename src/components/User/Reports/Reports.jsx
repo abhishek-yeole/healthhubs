@@ -10,6 +10,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Header from '../../Landing/Header/Header';
 import Background from '../../Landing/Background/Background';
+import Bfa from './Bfa';
+import Bmr from './Bmr';
+import Iw from './Iw';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,41 +65,29 @@ const Reports = () => {
         <Background /><br /><br /><br /><br />
         <Box sx={{ width: '95%', margin: 'auto', backgroundColor: 'rgba(255, 255, 255, 0.4)', border: '2px solid rgba(0, 0, 0, 0.18)', borderRadius: '12px'}}>
             <AppBar position="static" style={{color: 'black', borderRadius: '12px', backgroundColor: 'rgba(255, 255, 255, 0.9)', boxShadow: '0 8px 32px 0 rgba(255, 0, 204, 0.37)', backdropFilter: 'blur( 5px )', border: '2px solid rgba(0, 0, 0, 0.18)'}}>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    variant="scrollable"
-                    scrollButtons
-                    allowScrollButtonsMobile
-                    indicatorColor="primary"
-                    textColor="inherit"
-                    aria-label="full width tabs example"
-                >
+                <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons allowScrollButtonsMobile indicatorColor="primary" textColor="inherit" aria-label="full width tabs example" >
                     <Tab label="BMI Calculator" {...a11yProps(0)} style={{fontWeight: 'bolder'}}/>
                     <Tab label="Body Fat Calculator" {...a11yProps(1)} style={{fontWeight: 'bolder'}} />
                     <Tab label="BMR Calculator" {...a11yProps(2)} style={{fontWeight: 'bolder'}} />
                     <Tab label="Ideal Weight Calculator" {...a11yProps(3)} style={{fontWeight: 'bolder'}} />
                 </Tabs>
             </AppBar>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-            >
+            <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChangeIndex} >
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     <Bmi />
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                Item Two
+                    <Bfa />
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                Item Three
+                    <Bmr />
                 </TabPanel>
                 <TabPanel value={value} index={3} dir={theme.direction}>
-                Item Four
+                    <Iw />
                 </TabPanel>
             </SwipeableViews>
         </Box>
+        <br />
     </div>
   )
 }

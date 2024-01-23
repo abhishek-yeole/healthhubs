@@ -13,7 +13,13 @@
 .happy-info {
     display: flex;
     flex-direction: row;
+}
 
+.happy-image-1 img {
+    width: 150px;
+}
+.happy-image-2 img {
+    width: 250px;
 }
 
 .happy-text {
@@ -37,6 +43,11 @@
     font-weight: bolder;
 }
 
+.happy-content-hide,
+.happy-explore-hide {
+    display: none;
+}
+
 hr.happy-hr {
     border: 2px dashed rgba(82, 82, 82, 0.7);
     border-radius: 50%;
@@ -51,6 +62,7 @@ hr.happy-hr {
 }
 
 .happy-form {
+    width: 60%;
     padding: 10px;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(255, 0, 204, 0.37);
@@ -75,4 +87,63 @@ hr.happy-hr {
     padding: 10px;
     font-family: 'Poppins', serif;
     font-weight: 600;
+}
+
+@media screen and (max-width: 900px){
+    .happy-container {
+        border-radius: 12px;
+        padding: 5px;
+        width: 95%;
+    }
+    
+    .happy-info {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .happy-image-1 img {
+        width: 50px;
+    }
+    .happy-image-2 img {
+        width: 100px;
+    }
+    
+    .happy-text {
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .happy-title {
+        font-size: large;
+        font-weight: bold;
+    }
+    .happy-content,
+    .happy-explore {
+        display: none;
+    }
+
+    .happy-content-hide,
+    .happy-explore-hide {
+        text-align: center;
+        font-family: 'Poppins', serif;
+        font-weight: bold;
+        font-size: small;
+        display: block;
+    }
+    
+    .happy-survey {
+        flex-direction: column;
+        padding: 5px;
+    }
+    
+    .happy-form {
+        width: 98%;
+        padding: 5px;
+    }
+    
+    .happy-result {
+        width: 98%;
+        border-radius: 12px;
+        padding: 5px;
+    }    
 }

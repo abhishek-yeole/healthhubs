@@ -8,10 +8,10 @@ import FormLabel from '@mui/material/FormLabel';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import MARKDOWN from './BMIanalysis.md';
+import MARKDOWN from './BMRanalysis.md';
 import './report.css';
 
-const Bmi = () => {
+const Bmr = () => {
     const [age, setAge] = useState(20);
     const [gender, setGender] = useState('');
     const [weight, setWeight] = useState(70);
@@ -154,4 +154,4 @@ const Bmi = () => {
     )
 }
 
-export default Bmi;
+export default Bmr;
