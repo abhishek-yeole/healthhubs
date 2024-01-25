@@ -8,6 +8,7 @@ import report from '../../assets/Healthreports.png';
 import bot from '../../assets/healthbot.png';
 import memes from '../../assets/memes.png';
 import pets from '../../assets/pets.png';
+import cross from '../../assets/Model_demo_1.png'
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
@@ -28,6 +29,19 @@ const Navigation = () => {
                                     <div className='nav-content'>
                                         <div className='nav-title'>Machine Learning Models</div><br />
                                         <div className='nav-info'>Collected multiple models for the project related to the Healthcare and implemented them on HealthHub.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to={'../crossmodel'} style={{textDecoration:'none', color:'black'}}>
+                            <div className='nav-block background-7'>
+                                <div className='nav-card-7'>
+                                    <div className='nav-image'>
+                                        <img src={cross} alt="bot_image" />
+                                    </div>
+                                    <div className='nav-content'>
+                                        <div className='nav-title'>Cross Model Machine Learning</div><br />
+                                        <div className='nav-info'>A cross-model ML model for video processing in healthcare sentiment analysis involves combining different machine learning models to analyze sentiments expressed in healthcare-related videos.</div>
                                     </div>
                                 </div>
                             </div>

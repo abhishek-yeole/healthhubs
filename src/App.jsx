@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landing from "./components/Landing/Landing";
 import Ml from "./components/User/ML/Ml";
+import Ml2 from "./components/User/ML/Ml2";
 import Pet from "./components/User/Pet/Pet";
 import Happy from "./components/User/Happy/Happy";
 import Memes from "./components/User/Memes/Memes";
@@ -14,6 +15,7 @@ function App() {
 				<Route path="/" element={<Landing />} />
 				<Route path="/user" element={<Navigation />} />
 				<Route path="/ml" element={<Ml />} />
+				<Route path="/crossmodel" element={<Ml2 />} />
 				<Route path="/happy" element={<Happy />} />
 				<Route path="/pet" element={<Pet />} />
 				<Route path="/memes" element={<Memes />} />
