@@ -246,6 +246,7 @@ body::-webkit-scrollbar {
 
 .internal-references img,
 .external-references img{
+  object-fit: cover;
   width: 425px;
   border-radius: 20px;
 }

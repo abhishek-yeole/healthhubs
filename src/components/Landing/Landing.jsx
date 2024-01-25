@@ -5,6 +5,8 @@ import './landing.css';
 import Background from './Background/Background';
 import logo from '../../assets/healthtest.png';
 import demoModel from '../../assets/Model_Demo.png';
+import demoModel1 from '../../assets/Model_card_3.png';
+import demoModel2 from '../../assets/Model_Demo_2.png';
 import exRef1 from '../../assets/External_reference (1).png';
 import exRef2 from '../../assets/External_reference (2).png';
 import exRef3 from '../../assets/External_reference (3).png';
@@ -41,12 +43,12 @@ const Landing = () => {
 				</div>
 			</div>
 			<div className='hero-references'>
-				<div className='ref-subtitle'>Internal References</div>
+				<div className='ref-subtitle'> Links & References </div>
 				<br /><hr className='happy-hr' /><br />
 				<div className='internal-references'>
+					<Link to={'https://huggingface.co/spaces/abhicodes/cross-model-machine-learning-v2/'} target='blank'><img src={demoModel2} alt="Demo_Model_2" /></Link>
 					<Link to={'https://huggingface.co/spaces/abhicodes/healthapp/'} target='blank'><img src={demoModel} alt="Demo_Model" /></Link>
-					<Link to={'https://huggingface.co/spaces/abhicodes/healthapp/'} target='blank'><img src={demoModel} alt="Demo_Model" /></Link>
-					<Link to={'https://huggingface.co/spaces/abhicodes/healthapp/'} target='blank'><img src={demoModel} alt="Demo_Model" /></Link>
+					<Link to={'https://github.com/abhishek-yeole/healthhubs/'} target='blank'><img src={demoModel1} alt="Demo_Model_1" /></Link>
 				</div><br /><br /><br />
 				<div className='ref-subtitle'>External References</div>
 				<br /><hr className='happy-hr' /><br />
