@@ -9,7 +9,7 @@ Welcome to HealthHub, a Comprehensive ecosystem for health and wellness. Embark 
 ## Youtube
 To see the Demo Video Working for the Project:
 
-[![Youtube](https://img.youtube.com/vi/4NiDBY7JFN8.jpg)](https://www.youtube.com/watch?v=4NiDBY7JFN8)
+[![Youtube](https://img.youtube.com/vi/4NiDBY7JFN8/0.jpg)](https://www.youtube.com/watch?v=4NiDBY7JFN8)
 
 
 ## GeekforGeeks Article
