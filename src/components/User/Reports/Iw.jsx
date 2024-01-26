@@ -10,16 +10,13 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import MARKDOWN from './IWanalysis.md';
 import './report.css';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const Iw = () => {
     const [age, setAge] = useState(20);
     const [gender, setGender] = useState('');
-    const [weight, setWeight] = useState(70);
     const [height, setHeight] = useState(180);
-    const [bmi, setBmi] = useState(0);
-    const [bmiPrime, setBmiPrime] = useState(0);
-    const [ponIndex, setPonIndex] = useState(0);
-    const [message, setMessage] = useState('');
+    const [load, setLoad] = useState(true);
 
     const [markdown, setMarkdown] = useState('');
 
@@ -31,39 +28,30 @@ const Iw = () => {
             })
     }, []);
 
-    const calculateBmi = () => {
-        const heightInMeters = height / 100; 
-        const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2); 
-        setBmi(bmi);
-        const bmiPrime = (bmi/25).toFixed(2);
-        setBmiPrime(bmiPrime);
-        const ponIndex = (weight / (heightInMeters * heightInMeters * heightInMeters)).toFixed(2); 
-        setPonIndex(ponIndex);
+    const [list, setList] = useState([]);
+    let dataList = [];
 
-        let message = ''; 
-        if (bmi <= 16) { 
-            message = 'You are Underweight (Severe Thinness)'; 
-        } else if (bmi > 16 && bmi <= 17) { 
-            message = 'You are Underweight (Moderate Thinness)'; 
-        } else if (bmi > 17 && bmi <= 18.5) { 
-            message = 'You are Underweight (Mild Thinness)'; 
+    const calculateBmi = () => {
+        if (gender === 'male') {
+            let hmale = (48.0 + 2.7 * ((height - 152.40) / 2.54)).toFixed(2);
+            let dmale = (50.0 + 2.3 * ((height - 152.40) / 2.54)).toFixed(2);
+            let rmale = (52.0 + 1.9 * ((height - 152.40) / 2.54)).toFixed(2);
+            let mmale = (56.2 + 1.41 * ((height - 152.40) / 2.54)).toFixed(2);
+            dataList = [hmale,dmale,rmale,mmale];
         }
-        else if (bmi > 18.5 && bmi <= 25) { 
-            message = 'You are Normal'; 
-        } 
-        else if (bmi > 25 && bmi <= 30) { 
-            message = 'You are Overweight'; 
+        else if (gender === 'female') {
+            let hfemale = (45.5 + 2.2 * ((height - 152.40) / 2.54)).toFixed(2);
+            let dfemale = (45.5 + 2.3 * ((height - 152.40) / 2.54)).toFixed(2);
+            let rfemale = (49.0 + 1.7 * ((height - 152.40) / 2.54)).toFixed(2);
+            let mfemale = (53.1 + 1.36 * ((height - 152.40) / 2.54)).toFixed(2);
+            dataList = [hfemale,dfemale,rfemale,mfemale];
         }
-        else if (bmi > 30 && bmi <= 35) { 
-            message = 'You are Obese (Class 1)'; 
-        }
-        else if (bmi > 35 && bmi <= 40) { 
-            message = 'You are Obese (Class 2)'; 
-        }
-        else if (bmi > 40) { 
-            message = 'You are Obese (Class 3)'; 
-        }
-        setMessage(message);
+
+        setList([
+            { data: dataList}
+        ]);
+        
+        setLoad(false);
     };
 
     return (
@@ -106,21 +94,6 @@ const Iw = () => {
                         </Box>
                     </Box>
                     <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', alignItems: 'center' }}>
-                        <Icon icon="game-icons:weight" style={{fontSize: '28px'}}/>
-                        <TextField
-                            size='small'
-                            label="Weight"
-                            id="outlined-start-adornment"
-                            type='number'
-                            sx={{ m: 1, width: '25ch' }}
-                            InputProps={{
-                                endAdornment: <InputAdornment position="start">kg</InputAdornment>,
-                            }}
-                            value={weight}
-                            onChange={(e) => setWeight(e.target.value)}
-                        />
-                    </Box>
-                    <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', alignItems: 'center' }}>
                         <Icon icon="game-icons:body-height" style={{fontSize: '28px'}}/>
                         <TextField
                             size='small'
@@ -137,13 +110,23 @@ const Iw = () => {
                     </Box><br />
                     <Button variant='contained' onClick={calculateBmi}> Calculate </Button>
                 </div>
-                
-                <div className='bmi-output'>
-                    <div className='bmi-value'><b>BMI Value = </b>{bmi}kg/m<sup>2</sup></div><br />
-                    <div className='bmi-prime'><b>BMI Prime Value = </b>{bmiPrime}</div><br />
-                    <div className='pon-index'><b>Ponderal Index Value = </b>{ponIndex}kg/m<sup>3</sup></div><br />
-                    <div className='bmi-message'>{message}</div>
-                </div>
+
+                {load ? (
+                    <div className='bmi-output' style={{color: 'gray'}}>Enter the details!!</div>
+                ) : (
+                    <div className='bmi-output'>
+                        <BarChart
+                            series={list}
+                            height={290}
+                            xAxis={[{ data: ['Hamwi', 'Devine', 'Robinson', 'Miller'], scaleType: 'band' }]}
+                            margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+                        />
+                        <div className='bmi-value'><b>Hamwi formula(1964) = </b>{list[0].data[0]} kg</div><br />
+                        <div><b>Devine formula(1974) = </b>{list[0].data[1]} kg</div><br />
+                        <div><b>Robinson formula(1983) = </b>{list[0].data[2]} kg</div><br />
+                        <div><b>Miller formula(1983) = </b>{list[0].data[3]} kg</div>
+                    </div>
+                )}
 
                 <div className='analysis'>
                     <div className='bmi-title'>Analysis</div>

@@ -1,6 +1,7 @@
 body {
   margin: 0;
   overflow: auto;
+  scroll-behavior: smooth;
 }
 
 body::-webkit-scrollbar { 
@@ -325,5 +326,90 @@ body::-webkit-scrollbar {
   .ref-subtitle {
     font-size: 28px;
     font-weight: bold;
+  }
+}
+
+.end-intro {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 95vw;
+  margin: 10px auto;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 18px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px); 
+  box-shadow: 10px 10px 15px 1px rgba(0, 0, 0, 0.2);
+}
+
+.end-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+  width: 40%;
+  height: 50vh;
+}
+
+.left-header {
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.left-content {
+  text-align: justify;
+  word-spacing: 5px;
+}
+
+.end-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px auto;
+  width: 50%;
+  height: 50vh;
+}
+
+.right-header {
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.right-content {
+  text-align: justify;
+  word-spacing: 5px;
+}
+
+.form-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.end-spacer {
+  height: 10vh;
+}
+
+@media screen and (max-width: 900px) {
+  .end-spacer {
+    height: 10vh;
+  }
+
+  .end-intro {
+    flex-direction: column;
+    width: 95vw;
+    margin: 10px auto;
+  }
+  
+  .end-left {
+    width: 95%;
+    height: 60vh;
+  }
+  
+  .end-right {
+    width: 95%;
+    height: 60vh;
   }
 }

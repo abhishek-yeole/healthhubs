@@ -91,7 +91,7 @@
     border: 2px solid rgba(0, 0, 0, 0.18);
     padding: 10px;
     width: 30%;
-    height: 400px;
+    height: auto;
     font-size: large;
     font-family: 'Poppins', serif;
     display: flex;

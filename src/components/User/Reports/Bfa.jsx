@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import MARKDOWN from './BFAanalysis.md';
 import './report.css';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const Bfa = () => {
     const [age, setAge] = useState(20);
@@ -18,10 +19,11 @@ const Bfa = () => {
     const [height, setHeight] = useState(180);
     const [neck, setNeck] = useState(50);
     const [waist, setWaist] = useState(98);
-    const [bmi, setBmi] = useState(0);
-    const [bmiPrime, setBmiPrime] = useState(0);
-    const [ponIndex, setPonIndex] = useState(0);
-    const [message, setMessage] = useState('');
+    const [bfa, setBfa] = useState(0);
+    const [bfaCat, setBfaCat] = useState('');
+    const [fatMass, setFatMass] = useState(0);
+    const [leanMass, setLeanMass] = useState(0);
+    const [load, setLoad] = useState(true);
 
     const [markdown, setMarkdown] = useState('');
 
@@ -33,44 +35,73 @@ const Bfa = () => {
             })
     }, []);
 
+    const [list, setList] = useState([]);
+    let dataList = [];
+
     const calculateBmi = () => {
         const heightInMeters = height / 100; 
-        const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2); 
-        setBmi(bmi);
-        const bmiPrime = (bmi/25).toFixed(2);
-        setBmiPrime(bmiPrime);
-        const ponIndex = (weight / (heightInMeters * heightInMeters * heightInMeters)).toFixed(2); 
-        setPonIndex(ponIndex);
+        const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+        let bfa = 0; 
+        
+        if (age >= 20 && gender === 'male') {
+            bfa = (1.20 * bmi) + (0.23 * age) - 16.2;
+            setBfa(bfa.toFixed(2));
+        }
+        if (age >= 20 && gender === 'female') {
+            bfa = (1.20 * bmi) + (0.23 * age) - 5.4;
+            setBfa(bfa.toFixed(2));
+        }
+        if (age < 20 && gender === 'male') {
+            bfa = (1.51 * bmi) + (0.70 * age) - 2.2;
+            setBfa(bfa.toFixed(2));
+        }
+        if (age < 20 && gender === 'female') {
+            bfa = (1.51 * bmi) + (0.70 * age) - 1.4;
+            setBfa(bfa.toFixed(2));
+        }
 
-        let message = ''; 
-        if (bmi <= 16) { 
-            message = 'You are Underweight (Severe Thinness)'; 
-        } else if (bmi > 16 && bmi <= 17) { 
-            message = 'You are Underweight (Moderate Thinness)'; 
-        } else if (bmi > 17 && bmi <= 18.5) { 
-            message = 'You are Underweight (Mild Thinness)'; 
+        if ((gender === 'male' && bfa <= 5) || (gender === 'female' && bfa <= 13)) {
+            dataList = [bfa,0,0,0,0];
+            setBfaCat('Essential fat');
         }
-        else if (bmi > 18.5 && bmi <= 25) { 
-            message = 'You are Normal'; 
-        } 
-        else if (bmi > 25 && bmi <= 30) { 
-            message = 'You are Overweight'; 
+        else if ((gender === 'male' && (bfa >= 6 && bfa <= 13)) || (gender === 'female' && (bfa >= 14 && bfa <= 20))) {
+            dataList = [0,bfa,0,0,0];
+            setBfaCat('Athletes');
         }
-        else if (bmi > 30 && bmi <= 35) { 
-            message = 'You are Obese (Class 1)'; 
+        else if ((gender === 'male' && (bfa >= 14 && bfa <= 17)) || (gender === 'female' && (bfa >= 21 && bfa <= 24))) {
+            dataList = [0,0,bfa,0,0];
+            setBfaCat('Fitness');
         }
-        else if (bmi > 35 && bmi <= 40) { 
-            message = 'You are Obese (Class 2)'; 
+        else if ((gender === 'male' && (bfa >= 18 && bfa <= 24)) || (gender === 'female' && (bfa >= 25 && bfa <= 31))) {
+            dataList = [0,0,0,bfa,0];
+            setBfaCat('Average');
         }
-        else if (bmi > 40) { 
-            message = 'You are Obese (Class 3)'; 
+        else if ((gender === 'male' && bfa >= 25) || (gender === 'female' && bfa >= 32)) {
+            dataList = [0,0,0,0,bfa];
+            setBfaCat('Obese');
         }
-        setMessage(message);
+
+        setFatMass(((bfa/100)*weight).toFixed(2));
+        setLeanMass((weight - ((bfa/100)*weight)).toFixed(2));
+        if (gender === 'female') {
+            setList([
+                { data: [0, 5, 14, 18, 25] },
+                { data: dataList}
+            ]);
+        }
+        else if (gender === 'male') {
+            setList([
+                { data: [0, 14, 21, 25, 32] },
+                { data: dataList}
+            ]);
+        }
+
+        setLoad(false);
     };
 
     return (
         <div>
-            <div className='bmi-title'>BMI Calculator</div>
+            <div className='bmi-title'>Body Fate Percentage Calculator</div>
             
             <div className='bmi-main'>
                 <div className='bmi-survey'>
@@ -170,13 +201,23 @@ const Bfa = () => {
                     <Button variant='contained' onClick={calculateBmi}> Calculate </Button>
                 </div>
                 
-                <div className='bmi-output'>
-                    <div className='bmi-value'><b>BMI Value = </b>{bmi}kg/m<sup>2</sup></div><br />
-                    <div className='bmi-prime'><b>BMI Prime Value = </b>{bmiPrime}</div><br />
-                    <div className='pon-index'><b>Ponderal Index Value = </b>{ponIndex}kg/m<sup>3</sup></div><br />
-                    <div className='bmi-message'>{message}</div>
-                </div>
-
+                {load ? (
+                    <div className='bmi-output' style={{color: 'gray'}}>Enter the details!!</div>
+                ) : (
+                    <div className='bmi-output'>
+                        <BarChart
+                            series={list}
+                            height={290}
+                            xAxis={[{ data: ['Essential Fat', 'Atheletes', 'Fitness', 'Average', 'Obese'], scaleType: 'band' }]}
+                            margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+                        />
+                        <div className='bmi-value'><b>Body Fat Value = </b>{bfa} %</div><br />
+                        <div><b>Body Fat Category = </b>{bfaCat}</div><br />
+                        <div><b>Fat Mass = </b>{fatMass} kg</div><br />
+                        <div><b>Lean Mass = </b>{leanMass} kg</div>
+                    </div>
+                )}
+                
                 <div className='analysis'>
                     <div className='bmi-title'>Analysis</div>
                     <div className='analysis-markdown'><ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown></div>

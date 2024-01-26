@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import MARKDOWN from './BMIanalysis.md';
 import './report.css';
+import { BarChart } from '@mui/x-charts/BarChart';
 
 const Bmi = () => {
     const [age, setAge] = useState(20);
@@ -20,6 +21,7 @@ const Bmi = () => {
     const [bmiPrime, setBmiPrime] = useState(0);
     const [ponIndex, setPonIndex] = useState(0);
     const [message, setMessage] = useState('');
+    const [load, setLoad] = useState(true);
 
     const [markdown, setMarkdown] = useState('');
 
@@ -30,6 +32,9 @@ const Bmi = () => {
                 setMarkdown(md)
             })
     }, []);
+    
+    const [list, setList] = useState([]);
+    let dataList = [];
 
     const calculateBmi = () => {
         const heightInMeters = height / 100; 
@@ -42,33 +47,42 @@ const Bmi = () => {
 
         let message = ''; 
         if (bmi <= 16) { 
+            dataList = [bmi,0,0,0,0,0,0,0];
             message = 'You are Underweight (Severe Thinness)'; 
         } else if (bmi > 16 && bmi <= 17) { 
+            dataList = [0,bmi,0,0,0,0,0,0];
             message = 'You are Underweight (Moderate Thinness)'; 
         } else if (bmi > 17 && bmi <= 18.5) { 
+            dataList = [0,0,bmi,0,0,0,0,0];
             message = 'You are Underweight (Mild Thinness)'; 
-        }
-        else if (bmi > 18.5 && bmi <= 25) { 
+        } else if (bmi > 18.5 && bmi <= 25) { 
+            dataList = [0,0,0,bmi,0,0,0,0];
             message = 'You are Normal'; 
-        } 
-        else if (bmi > 25 && bmi <= 30) { 
+        } else if (bmi > 25 && bmi <= 30) { 
+            dataList = [0,0,0,0,bmi,0,0,0];
             message = 'You are Overweight'; 
-        }
-        else if (bmi > 30 && bmi <= 35) { 
+        } else if (bmi > 30 && bmi <= 35) { 
+            dataList = [0,0,0,0,0,bmi,0,0];
             message = 'You are Obese (Class 1)'; 
-        }
-        else if (bmi > 35 && bmi <= 40) { 
+        } else if (bmi > 35 && bmi <= 40) { 
+            dataList = [0,0,0,0,0,0,bmi,0];
             message = 'You are Obese (Class 2)'; 
-        }
-        else if (bmi > 40) { 
+        } else if (bmi > 40) { 
+            dataList = [0,0,0,0,0,0,0,bmi];
             message = 'You are Obese (Class 3)'; 
         }
         setMessage(message);
+        setList([
+            { data: [0, 16, 17, 18.5, 25, 30, 35, 40] },
+            { data: dataList}
+        ]);
+
+        setLoad(false);
     };
 
     return (
         <div>
-            <div className='bmi-title'>BMI Calculator</div>
+            <div className='bmi-title'>Body Mass Index Calculator</div>
             
             <div className='bmi-main'>
                 <div className='bmi-survey'>
@@ -137,13 +151,23 @@ const Bmi = () => {
                     </Box><br />
                     <Button variant='contained' onClick={calculateBmi}> Calculate </Button>
                 </div>
-                
-                <div className='bmi-output'>
-                    <div className='bmi-value'><b>BMI Value = </b>{bmi}kg/m<sup>2</sup></div><br />
-                    <div className='bmi-prime'><b>BMI Prime Value = </b>{bmiPrime}</div><br />
-                    <div className='pon-index'><b>Ponderal Index Value = </b>{ponIndex}kg/m<sup>3</sup></div><br />
-                    <div className='bmi-message'>{message}</div>
-                </div>
+
+                {load ? (
+                    <div className='bmi-output' style={{color: 'gray'}}>Enter the details!!</div>
+                ) : (
+                    <div className='bmi-output'>
+                        <BarChart
+                            series={list}
+                            height={290}
+                            xAxis={[{ data: ['Underweight (Severe Thinness)', 'Underweight (Moderate Thinness)', 'Underweight (Mild Thinness)', 'Normal', 'Overweight', 'Obese (Class 1)', 'Obese (Class 2)', 'Obese (Class 3)'], scaleType: 'band' }]}
+                            margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+                        />
+                        <div className='bmi-value'><b>BMI Value = </b>{bmi}kg/m<sup>2</sup></div><br />
+                        <div className='bmi-prime'><b>BMI Prime Value = </b>{bmiPrime}</div><br />
+                        <div className='pon-index'><b>Ponderal Index Value = </b>{ponIndex}kg/m<sup>3</sup></div><br />
+                        <div className='bmi-message'><b>{message}</b></div>
+                    </div>
+                )}
 
                 <div className='analysis'>
                     <div className='bmi-title'>Analysis</div>
