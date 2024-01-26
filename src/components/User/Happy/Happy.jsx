@@ -20,10 +20,12 @@ import Background from '../../Landing/Background/Background';
 import Header from '../../Landing/Header/Header';
 import happy1 from '../../../assets/happy1.png';
 import happy2 from '../../../assets/happy2.png';
-import result from '../../../assets/result.png';
 import './happy.css';
+import { BarChart } from '@mui/x-charts/BarChart';
   
 const Happy = () => {
+    const [finalScore, setFinalScore] = useState(0);
+    const [list, setList] = useState([]);
     const [activeStep, setActiveStep] = useState(0);
 
     const [ca1, setCa1] = useState(0);
@@ -31,52 +33,52 @@ const Happy = () => {
     const [sa2, setSa2] = useState(0);
     const [sa3, setSa3] = useState(0);
     const [sa4, setSa4] = useState(0);
-    const [p1, setP1] = useState('');
-    const [p2, setP2] = useState('');
-    const [p3, setP3] = useState('');
-    const [p4, setP4] = useState('');
-    const [p5, setP5] = useState('');
-    const [h1, setH1] = useState('');
-    const [h2, setH2] = useState('');
-    const [h3, setH3] = useState('');
-    const [h4, setH4] = useState('');
-    const [t1, setT1] = useState('');
-    const [t2, setT2] = useState('');
-    const [t3, setT3] = useState('');
-    const [l1, setL1] = useState('');
-    const [l2, setL2] = useState('');
-    const [l3, setL3] = useState('');
-    const [l4, setL4] = useState('');
-    const [co1, setCo1] = useState('');
-    const [co2, setCo2] = useState('');
-    const [co3, setCo3] = useState('');
-    const [co4, setCo4] = useState('');
-    const [co5, setCo5] = useState('');
-    const [co6, setCo6] = useState('');
-    const [co7, setCo7] = useState('');
-    const [so1, setSo1] = useState('');
-    const [so2, setSo2] = useState('');
-    const [so3, setSo3] = useState('');
-    const [so4, setSo4] = useState('');
-    const [e1, setE1] = useState('');
-    const [e2, setE2] = useState('');
-    const [e3, setE3] = useState('');
-    const [e4, setE4] = useState('');
-    const [g1, setG1] = useState('');
-    const [g2, setG2] = useState('');
-    const [g3, setG3] = useState('');
-    const [g4, setG4] = useState('');
+    const [p1, setP1] = useState(0);
+    const [p2, setP2] = useState(0);
+    const [p3, setP3] = useState(0);
+    const [p4, setP4] = useState(0);
+    const [p5, setP5] = useState(0);
+    const [h1, setH1] = useState(0);
+    const [h2, setH2] = useState(0);
+    const [h3, setH3] = useState(0);
+    const [h4, setH4] = useState(0);
+    const [t1, setT1] = useState(0);
+    const [t2, setT2] = useState(0);
+    const [t3, setT3] = useState(0);
+    const [l1, setL1] = useState(0);
+    const [l2, setL2] = useState(0);
+    const [l3, setL3] = useState(0);
+    const [l4, setL4] = useState(0);
+    const [co1, setCo1] = useState(0);
+    const [co2, setCo2] = useState(0);
+    const [co3, setCo3] = useState(0);
+    const [co4, setCo4] = useState(0);
+    const [co5, setCo5] = useState(0);
+    const [co6, setCo6] = useState(0);
+    const [co7, setCo7] = useState(0);
+    const [so1, setSo1] = useState(0);
+    const [so2, setSo2] = useState(0);
+    const [so3, setSo3] = useState(0);
+    const [so4, setSo4] = useState(0);
+    const [e1, setE1] = useState(0);
+    const [e2, setE2] = useState(0);
+    const [e3, setE3] = useState(0);
+    const [e4, setE4] = useState(0);
+    const [g1, setG1] = useState(0);
+    const [g2, setG2] = useState(0);
+    const [g3, setG3] = useState(0);
+    const [g4, setG4] = useState(0);
     const [g5, setG5] = useState(0);
-    const [st1, setSt1] = useState('');
-    const [st2, setSt2] = useState('');
-    const [st3, setSt3] = useState('');
-    const [st4, setSt4] = useState('');
-    const [w1, setW1] = useState('');
-    const [w2, setW2] = useState('');
-    const [w3, setW3] = useState('');
-    const [w4, setW4] = useState('');
-    const [w5, setW5] = useState('');
-    const [w6, setW6] = useState('');
+    const [st1, setSt1] = useState(0);
+    const [st2, setSt2] = useState(0);
+    const [st3, setSt3] = useState(0);
+    const [st4, setSt4] = useState(0);
+    const [w1, setW1] = useState(0);
+    const [w2, setW2] = useState(0);
+    const [w3, setW3] = useState(0);
+    const [w4, setW4] = useState(0);
+    const [w5, setW5] = useState(0);
+    const [w6, setW6] = useState(0);
 
     const [disabled, setDisabled] = useState(false);
     const [display, setDisplay] = useState(false);
@@ -96,8 +98,9 @@ const Happy = () => {
     const handleSubmit = async() => {
         setDisabled(true);
         setDisplay(true);
+        console.log(JSON.stringify({ ca1,sa1,sa2,sa3,sa4,p1,p2,p3,p4,p5,h1,h2,h3,h4,t1,t2,t3,l1,l2,l3,l4,co1,co2,co3,co4,co5,co6,co7,so1,so2,so3,so4,e1,e2,e3,e4,g1,g2,g3,g4,g5,st1,st2,st3,st4,w1,w2,w3,w4,w5,w6 }));
         try {
-            const response = await fetch( 'http://192.168.0.103:5000/happy', {
+            const response = await fetch( 'https://abhicodes-healthapi.hf.space/happy', {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',
@@ -108,8 +111,10 @@ const Happy = () => {
             if (response.ok) {
                 const data = await response.json();
                 if (data.success) {
-                    console.log(data);
+                    console.log(data.scores[1]);
                     setDisabled(true);
+                    setFinalScore(data.finalScore);
+                    setList([{data: [data.scores[0],data.scores[1],data.scores[2],data.scores[3],data.scores[4],data.scores[5],data.scores[6],data.scores[7],data.scores[8],data.scores[9],data.scores[10],data.scores[11]] }]);
                 } else {
                     console.log('Something got wrong. Please try again !!');
                 }
@@ -150,17 +155,17 @@ const Happy = () => {
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>If the top step is 10 and the bottom step is 0, on which step of the ladder do you feel you personally stand at the present time?</FormLabel>
                                         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="1" name="radio-buttons-group" value={ca1} onChange={(e) => setCa1(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Worst" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Best" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Worst" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Best" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -180,17 +185,17 @@ const Happy = () => {
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>Overall, how satisfied are you with your life nowadays?</FormLabel>
                                         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group" value={sa1} onChange={(e) => setSa1(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Not" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Completely" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Not" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Completely" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -199,17 +204,17 @@ const Happy = () => {
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>Overall, to what extent do you feel the things you do in your life are worthwhile?</FormLabel>
                                         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group" value={sa2} onChange={(e) => setSa2(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Not" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Completely" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Not" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Completely" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -218,17 +223,17 @@ const Happy = () => {
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>Overall, how happy did you feel yesterday?</FormLabel>
                                         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group" value={sa3} onChange={(e) => setSa3(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Not" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Completely" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Not" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Completely" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -237,17 +242,17 @@ const Happy = () => {
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>Overall, how anxious did you feel yesterday?</FormLabel>
                                         <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group" value={sa4} onChange={(e) => setSa4(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Not" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Completely" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Not" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Completely" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -270,11 +275,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={p1} onChange={(e) => setP1(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -287,11 +292,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={p2} onChange={(e) => setP2(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -304,11 +309,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={p3} onChange={(e) => setP3(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -321,11 +326,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={p4} onChange={(e) => setP4(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -338,11 +343,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={p5} onChange={(e) => setP5(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -366,11 +371,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={h1} onChange={(e) => setH1(e.target.value)}>
-                                                    <MenuItem value={'Poor'}>Poor</MenuItem>
-                                                    <MenuItem value={'Fair'}>Fair</MenuItem>
-                                                    <MenuItem value={'Good'}>Good</MenuItem>
-                                                    <MenuItem value={'Very Good'}>Very Good</MenuItem>
-                                                    <MenuItem value={'Excellent'}>Excellent</MenuItem>
+                                                    <MenuItem value={1}>Poor</MenuItem>
+                                                    <MenuItem value={2}>Fair</MenuItem>
+                                                    <MenuItem value={3}>Good</MenuItem>
+                                                    <MenuItem value={4}>Very Good</MenuItem>
+                                                    <MenuItem value={5}>Excellent</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -383,11 +388,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={h2} onChange={(e) => setH2(e.target.value)}>
-                                                    <MenuItem value={'Very rarely or never'}>Very rarely or never</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Sometimes'}>Sometimes</MenuItem>
-                                                    <MenuItem value={'Often'}>Often</MenuItem>
-                                                    <MenuItem value={'Very Often or Always'}>Very Often or Always</MenuItem>
+                                                    <MenuItem value={1}>Very rarely or never</MenuItem>
+                                                    <MenuItem value={2}>Rarely</MenuItem>
+                                                    <MenuItem value={3}>Sometimes</MenuItem>
+                                                    <MenuItem value={4}>Often</MenuItem>
+                                                    <MenuItem value={5}>Very Often or Always</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -400,11 +405,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={h3} onChange={(e) => setH3(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -417,11 +422,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={h4} onChange={(e) => setH4(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -445,11 +450,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={t1} onChange={(e) => setT1(e.target.value)}>
-                                                    <MenuItem value={'None of my time'}>None of my time</MenuItem>
-                                                    <MenuItem value={'Not much of my time'}>Not much of my time</MenuItem>
-                                                    <MenuItem value={'Some of my time'}>Some of my time</MenuItem>
-                                                    <MenuItem value={'Most of my time'}>Most of my time</MenuItem>
-                                                    <MenuItem value={'All of my time'}>All of my time</MenuItem>
+                                                    <MenuItem value={1}>None of my time</MenuItem>
+                                                    <MenuItem value={2}>Not much of my time</MenuItem>
+                                                    <MenuItem value={3}>Some of my time</MenuItem>
+                                                    <MenuItem value={4}>Most of my time</MenuItem>
+                                                    <MenuItem value={5}>All of my time</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -463,11 +468,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={t2} onChange={(e) => setT2(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -480,11 +485,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={t3} onChange={(e) => setT3(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -508,11 +513,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={l1} onChange={(e) => setL1(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -525,11 +530,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={l2} onChange={(e) => setL2(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -542,11 +547,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={l3} onChange={(e) =>setL3(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -559,11 +564,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={l4} onChange={(e) => setL4(e.target.value)}>
-                                                    <MenuItem value={'Never'}>Never</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Some of the Time'}>Some of the Time</MenuItem>
-                                                    <MenuItem value={'Most of the time'}>Most of the time</MenuItem>
-                                                    <MenuItem value={'All of the time'}>All of the time</MenuItem>
+                                                    <MenuItem value={1}>Never</MenuItem>
+                                                    <MenuItem value={2}>Rarely</MenuItem>
+                                                    <MenuItem value={3}>Some of the Time</MenuItem>
+                                                    <MenuItem value={4}>Most of the time</MenuItem>
+                                                    <MenuItem value={5}>All of the time</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -587,11 +592,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co1} onChange={(e) => setCo1(e.target.value)}>
-                                                    <MenuItem value={'Very Weak'}>Very Weak</MenuItem>
-                                                    <MenuItem value={'Somewhat Weak'}>Somewhat Weak</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Somewhat Strong'}>Somewhat Strong</MenuItem>
-                                                    <MenuItem value={'Very Strong'}>Very Strong</MenuItem>
+                                                    <MenuItem value={1}>Very Weak</MenuItem>
+                                                    <MenuItem value={2}>Somewhat Weak</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Somewhat Strong</MenuItem>
+                                                    <MenuItem value={5}>Very Strong</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -605,11 +610,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co2} onChange={(e) => setCo2(e.target.value)}>
-                                                    <MenuItem value={'Trust none of them'}>Trust none of them</MenuItem>
-                                                    <MenuItem value={'Trust a few of them'}>Trust a few of them</MenuItem>
-                                                    <MenuItem value={'Trust some of them'}>Trust some of them</MenuItem>
-                                                    <MenuItem value={'Trust most of them'}>Trust most of them</MenuItem>
-                                                    <MenuItem value={'Trust all of them'}>Trust all of them</MenuItem>
+                                                    <MenuItem value={1}>Trust none of them</MenuItem>
+                                                    <MenuItem value={2}>Trust a few of them</MenuItem>
+                                                    <MenuItem value={3}>Trust some of them</MenuItem>
+                                                    <MenuItem value={4}>Trust most of them</MenuItem>
+                                                    <MenuItem value={5}>Trust all of them</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -622,11 +627,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co3} onChange={(e) => setCo3(e.target.value)}>
-                                                    <MenuItem value={'Trust none of them'}>Trust none of them</MenuItem>
-                                                    <MenuItem value={'Trust a few of them'}>Trust a few of them</MenuItem>
-                                                    <MenuItem value={'Trust some of them'}>Trust some of them</MenuItem>
-                                                    <MenuItem value={'Trust most of them'}>Trust most of them</MenuItem>
-                                                    <MenuItem value={'Trust all of them'}>Trust all of them</MenuItem>
+                                                    <MenuItem value={1}>Trust none of them</MenuItem>
+                                                    <MenuItem value={2}>Trust a few of them</MenuItem>
+                                                    <MenuItem value={3}>Trust some of them</MenuItem>
+                                                    <MenuItem value={4}>Trust most of them</MenuItem>
+                                                    <MenuItem value={5}>Trust all of them</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -640,11 +645,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co4} onChange={(e) => setCo4(e.target.value)}>
-                                                    <MenuItem value={'Not at all likely'}>Not at all likely</MenuItem>
-                                                    <MenuItem value={'Somewhat likely'}>Somewhat likely</MenuItem>
-                                                    <MenuItem value={'Fairly likely'}>Fairly likely</MenuItem>
-                                                    <MenuItem value={'Very likely'}>Very likely</MenuItem>
-                                                    <MenuItem value={'Extremely likely'}>Extremely likely</MenuItem>
+                                                    <MenuItem value={1}>Not at all likely</MenuItem>
+                                                    <MenuItem value={2}>Somewhat likely</MenuItem>
+                                                    <MenuItem value={3}>Fairly likely</MenuItem>
+                                                    <MenuItem value={4}>Very likely</MenuItem>
+                                                    <MenuItem value={5}>Extremely likely</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -657,11 +662,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co5} onChange={(e) => setCo5(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -675,11 +680,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co6} onChange={(e) => setCo6(e.target.value)}>
-                                                    <MenuItem value={'At least once a month'}>Atleast once a month</MenuItem>
-                                                    <MenuItem value={'At least once every three months'}>At least once every three months</MenuItem>
-                                                    <MenuItem value={'At least once every six months'}>At least once every six months</MenuItem>
-                                                    <MenuItem value={'Once in the last Year'}>Once in the last Year</MenuItem>
-                                                    <MenuItem value={'Never'}>Never</MenuItem>
+                                                    <MenuItem value={5}>Atleast once a month</MenuItem>
+                                                    <MenuItem value={4}>At least once every three months</MenuItem>
+                                                    <MenuItem value={3}>At least once every six months</MenuItem>
+                                                    <MenuItem value={2}>Once in the last Year</MenuItem>
+                                                    <MenuItem value={1}>Never</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -692,11 +697,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={co7} onChange={(e) => setCo7(e.target.value)}>
-                                                    <MenuItem value={'At least once a month'}>Atleast once a month</MenuItem>
-                                                    <MenuItem value={'At least once every three months'}>At least once every three months</MenuItem>
-                                                    <MenuItem value={'At least once every six months'}>At least once every six months</MenuItem>
-                                                    <MenuItem value={'Once in the last Year'}>Once in the last Year</MenuItem>
-                                                    <MenuItem value={'Never'}>Never</MenuItem>
+                                                    <MenuItem value={5}>Atleast once a month</MenuItem>
+                                                    <MenuItem value={4}>At least once every three months</MenuItem>
+                                                    <MenuItem value={3}>At least once every six months</MenuItem>
+                                                    <MenuItem value={2}>Once in the last Year</MenuItem>
+                                                    <MenuItem value={1}>Never</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -720,11 +725,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={so1} onChange={(e) => setSo1(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -737,11 +742,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={so2} onChange={(e) => setSo2(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -755,11 +760,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={so3} onChange={(e) => setSo3(e.target.value)}>
-                                                    <MenuItem value={'Very rarely or never'}>Very rarely or never</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Sometimes'}>Sometimes</MenuItem>
-                                                    <MenuItem value={'Often'}>Often</MenuItem>
-                                                    <MenuItem value={'Very Often or Always'}>Very Often or Always</MenuItem>
+                                                    <MenuItem value={1}>Very rarely or never</MenuItem>
+                                                    <MenuItem value={2}>Rarely</MenuItem>
+                                                    <MenuItem value={3}>Sometimes</MenuItem>
+                                                    <MenuItem value={4}>Often</MenuItem>
+                                                    <MenuItem value={5}>Very Often or Always</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -772,11 +777,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={so4} onChange={(e) => setSo4(e.target.value)}>
-                                                    <MenuItem value={'Very rarely or never'}>Very rarely or never</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Sometimes'}>Sometimes</MenuItem>
-                                                    <MenuItem value={'Often'}>Often</MenuItem>
-                                                    <MenuItem value={'Very Often or Always'}>Very Often or Always</MenuItem>
+                                                    <MenuItem value={1}>Very rarely or never</MenuItem>
+                                                    <MenuItem value={2}>Rarely</MenuItem>
+                                                    <MenuItem value={3}>Sometimes</MenuItem>
+                                                    <MenuItem value={4}>Often</MenuItem>
+                                                    <MenuItem value={5}>Very Often or Always</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -800,11 +805,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={e1} onChange={(e) => setE1(e.target.value)}>
-                                                    <MenuItem value={'Not at all'}>Not at all</MenuItem>
-                                                    <MenuItem value={'A little'}>A little</MenuItem>
-                                                    <MenuItem value={'Somewhat'}>Somewhat</MenuItem>
-                                                    <MenuItem value={'Very'}>Very</MenuItem>
-                                                    <MenuItem value={'Extremely'}>Extremely</MenuItem>
+                                                    <MenuItem value={1}>Not at all</MenuItem>
+                                                    <MenuItem value={2}>A little</MenuItem>
+                                                    <MenuItem value={3}>Somewhat</MenuItem>
+                                                    <MenuItem value={4}>Very</MenuItem>
+                                                    <MenuItem value={5}>Extremely</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -818,11 +823,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={e2} onChange={(e) => setE2(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -835,11 +840,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={e3} onChange={(e) => setE3(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -852,11 +857,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={e4} onChange={(e) => setE4(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -881,11 +886,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={g1} onChange={(e) => setG1(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -899,11 +904,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={g2} onChange={(e) => setG2(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -917,11 +922,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={g3} onChange={(e) => setG3(e.target.value)}>
-                                                <MenuItem value={'No confidence'}>No confidence</MenuItem>
-                                                    <MenuItem value={'Not very much confidence'}>Not very much confidence</MenuItem>
-                                                    <MenuItem value={'A fair amouunt if confidence'}>A fair amouunt if confidence</MenuItem>
-                                                    <MenuItem value={'Quite a lot of confidence'}>Quite a lot of confidence</MenuItem>
-                                                    <MenuItem value={'A great deal of confidence'}>A great deal of confidence</MenuItem>
+                                                <MenuItem value={1}>No confidence</MenuItem>
+                                                    <MenuItem val2e={1}>Not very much confidence</MenuItem>
+                                                    <MenuItem val3e={2}>A fair amouunt if confidence</MenuItem>
+                                                    <MenuItem value={4}>Quite a lot of confidence</MenuItem>
+                                                    <MenuItem value={5}>A great deal of confidence</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -934,11 +939,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={g4} onChange={(e) => setG4(e.target.value)}>
-                                                    <MenuItem value={'No confidence'}>No confidence</MenuItem>
-                                                    <MenuItem value={'Not very much confidence'}>Not very much confidence</MenuItem>
-                                                    <MenuItem value={'A fair amouunt if confidence'}>A fair amouunt if confidence</MenuItem>
-                                                    <MenuItem value={'Quite a lot of confidence'}>Quite a lot of confidence</MenuItem>
-                                                    <MenuItem value={'A great deal of confidence'}>A great deal of confidence</MenuItem>
+                                                    <MenuItem value={1}>No confidence</MenuItem>
+                                                    <MenuItem value={2}>Not very much confidence</MenuItem>
+                                                    <MenuItem value={3}>A fair amouunt if confidence</MenuItem>
+                                                    <MenuItem value={4}>Quite a lot of confidence</MenuItem>
+                                                    <MenuItem value={5}>A great deal of confidence</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -946,19 +951,19 @@ const Happy = () => {
                                     <br /><br />
                                     <FormControl>
                                         <FormLabel id="demo-radio-buttons-group-label"><strong>Question: </strong>If the top step is 10 and the bottom step is 0, on which step of the ladder do you feel you personally stand at the present time?</FormLabel>
-                                        <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="0" name="radio-buttons-group" value={g5} onChange={(e) => setG5(e.target.value)}>
+                                        <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue={0} name="radio-buttons-group" value={g5} onChange={(e) => setG5(e.target.value)}>
                                             <Box sx={{ '& > :not(style)': { m: 1 }, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <FormControlLabel value="0" control={<Radio />} label="0 Not" />
-                                                <FormControlLabel value="1" control={<Radio />} label="1" />
-                                                <FormControlLabel value="2" control={<Radio />} label="2" />
-                                                <FormControlLabel value="3" control={<Radio />} label="3" />
-                                                <FormControlLabel value="4" control={<Radio />} label="4" />
-                                                <FormControlLabel value="5" control={<Radio />} label="5" />
-                                                <FormControlLabel value="6" control={<Radio />} label="6" />
-                                                <FormControlLabel value="7" control={<Radio />} label="7" />
-                                                <FormControlLabel value="8" control={<Radio />} label="8" />
-                                                <FormControlLabel value="9" control={<Radio />} label="9" />
-                                                <FormControlLabel value="10" control={<Radio />} label="10 Completely" />
+                                                <FormControlLabel value={0} control={<Radio />} label="0 Not" />
+                                                <FormControlLabel value={1} control={<Radio />} label="1" />
+                                                <FormControlLabel value={2} control={<Radio />} label="2" />
+                                                <FormControlLabel value={3} control={<Radio />} label="3" />
+                                                <FormControlLabel value={4} control={<Radio />} label="4" />
+                                                <FormControlLabel value={5} control={<Radio />} label="5" />
+                                                <FormControlLabel value={6} control={<Radio />} label="6" />
+                                                <FormControlLabel value={7} control={<Radio />} label="7" />
+                                                <FormControlLabel value={8} control={<Radio />} label="8" />
+                                                <FormControlLabel value={9} control={<Radio />} label="9" />
+                                                <FormControlLabel value={10} control={<Radio />} label="10 Completely" />
                                             </Box>
                                         </RadioGroup>
                                     </FormControl>
@@ -981,11 +986,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={st1} onChange={(e) => setSt1(e.target.value)}>
-                                                    <MenuItem value={'Overwhleming stress'}>Overwhleming stress</MenuItem>
-                                                    <MenuItem value={'High stress'}>High stress</MenuItem>
-                                                    <MenuItem value={'Moderate stress'}>Moderate stress</MenuItem>
-                                                    <MenuItem value={'Low stress'}>Low stress</MenuItem>
-                                                    <MenuItem value={'No stress at all'}>No stress at all</MenuItem>
+                                                    <MenuItem value={1}>Overwhleming stress</MenuItem>
+                                                    <MenuItem value={2}>High stress</MenuItem>
+                                                    <MenuItem value={3}>Moderate stress</MenuItem>
+                                                    <MenuItem value={4}>Low stress</MenuItem>
+                                                    <MenuItem value={5}>No stress at all</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -998,11 +1003,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={st2} onChange={(e) => setSt2(e.target.value)}>
-                                                    <MenuItem value={'All the time'}>All the time</MenuItem>
-                                                    <MenuItem value={'Most of the time'}>Most of the time</MenuItem>
-                                                    <MenuItem value={'Sometimes'}>Sometimes</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Never'}>Never</MenuItem>
+                                                    <MenuItem value={1}>All the time</MenuItem>
+                                                    <MenuItem value={2}>Most of the time</MenuItem>
+                                                    <MenuItem value={3}>Sometimes</MenuItem>
+                                                    <MenuItem value={4}>Rarely</MenuItem>
+                                                    <MenuItem value={5}>Never</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1015,11 +1020,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={st3} onChange={(e) => setSt3(e.target.value)}>
-                                                    <MenuItem value={'At least once a month'}>Atleast once a month</MenuItem>
-                                                    <MenuItem value={'At least once every three months'}>At least once every three months</MenuItem>
-                                                    <MenuItem value={'At least once every six months'}>At least once every six months</MenuItem>
-                                                    <MenuItem value={'Once in the last Year'}>Once in the last Year</MenuItem>
-                                                    <MenuItem value={'Never'}>Never</MenuItem>
+                                                    <MenuItem value={1}>Atleast once a month</MenuItem>
+                                                    <MenuItem value={2}>At least once every three months</MenuItem>
+                                                    <MenuItem value={3}>At least once every six months</MenuItem>
+                                                    <MenuItem value={4}>Once in the last Year</MenuItem>
+                                                    <MenuItem value={5}>Never</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1032,11 +1037,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={st4} onChange={(e) => setSt4(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1060,11 +1065,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w1} onChange={(e) => setW1(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1077,11 +1082,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w2} onChange={(e) => setW2(e.target.value)}>
-                                                    <MenuItem value={'Very Satisfied'}>Very Satisfied</MenuItem>
-                                                    <MenuItem value={'Satisfied'}>Satisfied</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Dissatisfied'}>Dissatisfied</MenuItem>
-                                                    <MenuItem value={'Very Dissatisfied'}>Very Dissatisfied</MenuItem>
+                                                    <MenuItem value={5}>Very Satisfied</MenuItem>
+                                                    <MenuItem value={4}>Satisfied</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={2}>Dissatisfied</MenuItem>
+                                                    <MenuItem value={1}>Very Dissatisfied</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1094,11 +1099,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w3} onChange={(e) => setW3(e.target.value)}>
-                                                    <MenuItem value={'Very rarely or never'}>Very rarely or never</MenuItem>
-                                                    <MenuItem value={'Rarely'}>Rarely</MenuItem>
-                                                    <MenuItem value={'Sometimes'}>Sometimes</MenuItem>
-                                                    <MenuItem value={'Often'}>Often</MenuItem>
-                                                    <MenuItem value={'Very Often or Always'}>Very Often or Always</MenuItem>
+                                                    <MenuItem value={1}>Very rarely or never</MenuItem>
+                                                    <MenuItem value={2}>Rarely</MenuItem>
+                                                    <MenuItem value={3}>Sometimes</MenuItem>
+                                                    <MenuItem value={4}>Often</MenuItem>
+                                                    <MenuItem value={5}>Very Often or Always</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1112,11 +1117,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w4} onChange={(e) => setW4(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1129,11 +1134,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w5} onChange={(e) => setW5(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1146,11 +1151,11 @@ const Happy = () => {
                                             <FormControl fullWidth size='small'>
                                                 <InputLabel id="age-input-label" required>Select</InputLabel>
                                                 <Select labelId="age-input-label" label="Psycho" name="personCount"  required fullWidth value={w6} onChange={(e) => setW6(e.target.value)}>
-                                                    <MenuItem value={'Strongly Disagree'}>Strongly Disagree</MenuItem>
-                                                    <MenuItem value={'Disagree'}>Disagree</MenuItem>
-                                                    <MenuItem value={'Neutral'}>Neutral</MenuItem>
-                                                    <MenuItem value={'Agree'}>Agree</MenuItem>
-                                                    <MenuItem value={'Strongly Agree'}>Strongly Agree</MenuItem>
+                                                    <MenuItem value={1}>Strongly Disagree</MenuItem>
+                                                    <MenuItem value={2}>Disagree</MenuItem>
+                                                    <MenuItem value={3}>Neutral</MenuItem>
+                                                    <MenuItem value={4}>Agree</MenuItem>
+                                                    <MenuItem value={5}>Strongly Agree</MenuItem>
                                                 </Select>
                                             </FormControl>
                                         </Box>
@@ -1186,8 +1191,13 @@ const Happy = () => {
                     <div className='happy-result'>
                         {display ? (
                             <div>
-                                <img src={result} alt="Analysis_chart" width={'100%'} />
-                                Your Happiness Index Score is: <b>6.53</b>.
+                                <BarChart
+                                    series={list}
+                                    height={400}
+                                    xAxis={[{ data: ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'G11' ,'G12'], scaleType: 'band' }]}
+                                    margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+                                />
+                                Your Happiness Index Score is: <b>{finalScore}</b>.
                             </div>
                         ) : (
                             <div style={{color:'grey', textAlign:'center'}}>
