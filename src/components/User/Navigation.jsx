@@ -86,37 +86,6 @@ const Navigation = () => {
                             </div>
                         </Link>
                     </div>
-                    <br /><br />
-                    
-                    <div className='nav-section-2'>Extras <hr className='nav-section' /> </div>
-                    <div className='nav-cards'>
-                        <Link to={'../pet'} style={{textDecoration:'none', color:'black'}}>
-                            <div className='nav-block background-5'>
-                                <div className='nav-card-5'>
-                                    <div className='nav-image'>
-                                        <img src={pets} alt="Pets_image" />
-                                    </div>
-                                    <div className='nav-content'>
-                                        <div className='nav-title'>Adopt a Pet!</div><br />
-                                        <div className='nav-info'>Adopting a pet animal for emotional support is very beneficial for health.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                        <Link to={'../memes'} style={{textDecoration:'none', color:'black'}}>
-                            <div className='nav-block background-6'>
-                                <div className='nav-card-6'>
-                                    <div className='nav-image'>
-                                        <img src={memes} alt="Memes_image" />
-                                    </div>
-                                    <div className='nav-content'>
-                                        <div className='nav-title'>Relax!</div><br />
-                                        <div className='nav-info'>Memes</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
                 </div>
             </div><br />
         </div>
